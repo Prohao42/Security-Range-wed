@@ -1,0 +1,207 @@
+<?php
+/**
+ * Zhazhasu炸炸酥网安靱场团队 - 文件相关XSS靶场 - 文件上传API
+ * 版本: v1.0.0
+ * 创建日期: 2026-03-03
+ * 团队: 炸炸酥网安靱场 (Zhazhasu)
+ *
+ * 本文件双重身份：
+ *  - 被直接访问（HTTP POST /api/upload.php）时，作为独立 API 输出 JSON
+ *  - 被 level1/2/3 require 时，仅暴露 zhazhasu_handle_file_upload() 函数，不输出
+ * 这样绕开了原先 level.php 用 cURL 自连导致的 host/port 兼容问题。
+ */
+
+/**
+ * 处理文件上传：校验 + 落盘
+ *
+ * @param array $files 形如 $_FILES 的数组，需含 'file' 键
+ * @param array $post  形如 $_POST 的数组，需含 'type' 键（svg|pdf|image）
+ * @return array {success:bool, message?:string, file_path?:string, content?:string}
+ */
+function zhazhasu_handle_file_upload($files, $post) {
+    if (!isset($files['file']) || $files['file']['error'] !== UPLOAD_ERR_OK) {
+        return ['success' => false, 'message' => '[Zhazhasu] 文件上传失败，请重试'];
+    }
+
+    $fileType = isset($post['type']) ? $post['type'] : '';
+    if (!in_array($fileType, ['svg', 'pdf', 'image'])) {
+        return ['success' => false, 'message' => '[Zhazhasu] 无效的文件类型参数'];
+    }
+
+    $file = $files['file'];
+    $fileName = $file['name'];
+    $fileTmpName = $file['tmp_name'];
+    $fileSize = $file['size'];
+    $fileMime = $file['type'];
+
+    // 上传目录
+    $uploadDir = __DIR__ . '/../uploads/temp/';
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0755, true);
+    }
+
+    switch ($fileType) {
+        case 'svg':
+            return validateSvg($fileTmpName, $fileName, $fileSize, $fileMime);
+        case 'pdf':
+            return validatePdf($fileTmpName, $fileName, $fileSize, $fileMime, $uploadDir);
+        case 'image':
+            return validateImage($fileTmpName, $fileName, $fileSize, $fileMime, $uploadDir);
+        default:
+            return ['success' => false, 'message' => '未知的文件类型'];
+    }
+}
+
+/**
+ * 验证SVG文件
+ */
+function validateSvg($file, $fileName, $fileSize, $fileMime) {
+    // 文件大小限制 1MB
+    $maxSize = 1 * 1024 * 1024;
+    if ($fileSize > $maxSize) {
+        return ['success' => false, 'message' => '文件大小超过限制（最大1MB）'];
+    }
+
+    // 验证扩展名
+    $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+    if ($ext !== 'svg') {
+        return ['success' => false, 'message' => '文件类型不支持，请上传SVG文件'];
+    }
+
+    // 验证MIME类型
+    $allowedMimes = ['image/svg+xml', 'image/svg', 'application/svg+xml', 'text/svg+xml'];
+    if (!in_array($fileMime, $allowedMimes)) {
+        return ['success' => false, 'message' => 'MIME类型不支持，请上传有效的SVG文件'];
+    }
+
+    // 读取文件内容
+    $content = file_get_contents($file);
+
+    // SVG语法验证：检查是否包含<svg>标签
+    if (stripos($content, '<svg') === false) {
+        return ['success' => false, 'message' => '无效的SVG文件格式'];
+    }
+
+    // 关键过滤：检测并拦截<script>标签（大小写不敏感）
+    if (preg_match('/<script[\s>]/i', $content)) {
+        return ['success' => false, 'message' => 'SVG文件包含不安全的内容'];
+    }
+
+    return ['success' => true, 'content' => $content];
+}
+
+/**
+ * 验证PDF文件
+ */
+function validatePdf($file, $fileName, $fileSize, $fileMime, $uploadDir) {
+    // 文件大小限制 5MB
+    $maxSize = 5 * 1024 * 1024;
+    if ($fileSize > $maxSize) {
+        return ['success' => false, 'message' => '文件大小超过限制（最大5MB）'];
+    }
+
+    // 验证扩展名
+    $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+    if ($ext !== 'pdf') {
+        return ['success' => false, 'message' => '文件类型不支持，请上传PDF文件'];
+    }
+
+    // 验证MIME类型
+    $allowedMimes = ['application/pdf', 'application/x-pdf', 'application/acrobat', 'applications/vnd.pdf', 'text/pdf', 'text/x-pdf'];
+    if (!in_array($fileMime, $allowedMimes)) {
+        return ['success' => false, 'message' => 'MIME类型不支持，请上传有效的PDF文件'];
+    }
+
+    // 不重命名文件，保持原始文件名
+    $newFileName = basename($fileName);
+    $filePath = $uploadDir . $newFileName;
+
+    // 移动文件到临时目录
+    if (!move_uploaded_file($file, $filePath)) {
+        return ['success' => false, 'message' => '文件保存失败'];
+    }
+
+    return [
+        'success' => true,
+        'file_path' => 'uploads/temp/' . $newFileName,
+        'message' => '文件上传成功'
+    ];
+}
+
+/**
+ * 验证图片文件
+ */
+function validateImage($file, $fileName, $fileSize, $fileMime, $uploadDir) {
+    // 文件大小限制 2MB
+    $maxSize = 2 * 1024 * 1024;
+    if ($fileSize > $maxSize) {
+        return ['success' => false, 'message' => '文件大小超过限制（最大2MB）'];
+    }
+
+    // 验证扩展名
+    $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+    $allowedExts = ['png', 'jpg', 'jpeg', 'gif'];
+    if (!in_array($ext, $allowedExts)) {
+        return ['success' => false, 'message' => '文件类型不支持，请上传PNG、JPG或GIF图片'];
+    }
+
+    // 验证MIME类型
+    $allowedMimes = ['image/png', 'image/jpeg', 'image/gif'];
+    if (!in_array($fileMime, $allowedMimes)) {
+        return ['success' => false, 'message' => 'MIME类型不支持，请上传有效的图片文件'];
+    }
+
+    // 不重命名文件，保持原始文件名
+    $newFileName = basename($fileName);
+    $filePath = $uploadDir . $newFileName;
+
+    // 移动文件到临时目录
+    if (!move_uploaded_file($file, $filePath)) {
+        return ['success' => false, 'message' => '文件保存失败'];
+    }
+
+    return [
+        'success' => true,
+        'file_path' => 'uploads/temp/' . $newFileName,
+        'message' => '文件上传成功'
+    ];
+}
+
+// === HTTP API 入口：仅当被直接访问时执行（保留攻击向量） ===
+if (realpath($_SERVER['SCRIPT_FILENAME']) === realpath(__FILE__)) {
+    header('X-Zhazhasu: Zhazhasu 文件相关XSS上传API v1.0.0');
+    header('Content-Type: application/json; charset=utf-8');
+
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        http_response_code(405);
+        echo json_encode([
+            'success' => false,
+            'message' => '[Zhazhasu] 只允许POST请求'
+        ]);
+        exit;
+    }
+
+    $result = zhazhasu_handle_file_upload($_FILES, $_POST);
+
+    if (!$result['success']) {
+        http_response_code(400);
+        // validate 函数返回的错误 message 不带前缀，这里补齐 [Zhazhasu] 前缀（与原行为一致）
+        $msg = $result['message'];
+        if (strpos($msg, '[Zhazhasu]') !== 0) {
+            $msg = '[Zhazhasu] ' . $msg;
+        }
+        echo json_encode([
+            'success' => false,
+            'message' => $msg
+        ]);
+        exit;
+    }
+
+    echo json_encode([
+        'success' => true,
+        'message' => $result['message'] ?? '文件上传成功',
+        'file_path' => $result['file_path'] ?? '',
+        'content' => $result['content'] ?? ''
+    ]);
+    exit;
+}

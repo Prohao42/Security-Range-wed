@@ -1,0 +1,176 @@
+/**
+ * Zhazhasu炸炸酥网安靱场团队 - 科技蓝UI组件库变量定义
+ * Tech Blue UI Component Library Variables
+ * 版本: v1.0.0
+ * 创建日期: 2025-11-11
+ * 团队: 炸炸酥网安靱场 (Zhazhasu)
+ * 描述: 基于科技蓝风格的UI组件库变量系统
+ */
+
+/* ==================== CSS变量定义 ==================== */
+:root {
+    /* 继承现有基础变量，扩展科技蓝主题 */
+    
+    /* 科技蓝主色调系统 - 基于#007BFF扩展 */
+    --zhazhasu-tech-primary: #007BFF;
+    --zhazhasu-tech-primary-light: #3399FF;
+    --zhazhasu-tech-primary-dark: #0056B3;
+    --zhazhasu-tech-primary-gradient: linear-gradient(135deg, #007BFF 0%, #0056B3 100%);
+    
+    /* 科技蓝辅助色调 */
+    --zhazhasu-tech-secondary: #0066CC;
+    --zhazhasu-tech-accent: #00CCFF;
+    --zhazhasu-tech-cyan: #00FFFF;
+    --zhazhasu-tech-electric: #0099FF;
+    --zhazhasu-tech-neon: #00CCFF;
+    
+    /* 状态色彩 - 科技化处理 */
+    --zhazhasu-tech-success: #28A745;
+    --zhazhasu-tech-success-light: #5CBF2A;
+    --zhazhasu-tech-success-gradient: linear-gradient(135deg, #28A745 0%, #20C997 100%);
+    
+    --zhazhasu-tech-warning: #FFC107;
+    --zhazhasu-tech-warning-light: #FFD54F;
+    --zhazhasu-tech-warning-gradient: linear-gradient(135deg, #FFC107 0%, #FF9800 100%);
+    
+    --zhazhasu-tech-danger: #DC3545;
+    --zhazhasu-tech-danger-light: #E74C3C;
+    --zhazhasu-tech-danger-gradient: linear-gradient(135deg, #DC3545 0%, #C82333 100%);
+    
+    --zhazhasu-tech-info: #17A2B8;
+    --zhazhasu-tech-info-light: #5DADE2;
+    --zhazhasu-tech-info-gradient: linear-gradient(135deg, #17A2B8 0%, #138496 100%);
+    
+    /* 背景色系 - 科技感 */
+    --zhazhasu-tech-bg-primary: rgba(255, 255, 255, 0.95);
+    --zhazhasu-tech-bg-secondary: rgba(240, 248, 255, 0.9);
+    --zhazhasu-tech-bg-tertiary: rgba(230, 244, 255, 0.85);
+    --zhazhasu-tech-bg-gradient: linear-gradient(135deg, #F0F8FF 0%, #E6F4FF 100%);
+    
+    /* 文字色系 */
+    --zhazhasu-tech-text-primary: #2C3E50;
+    --zhazhasu-tech-text-secondary: #546E7A;
+    --zhazhasu-tech-text-muted: #90A4AE;
+    --zhazhasu-tech-text-inverse: #FFFFFF;
+    
+    /* 边框色系 */
+    --zhazhasu-tech-border: rgba(0, 123, 255, 0.2);
+    --zhazhasu-tech-border-light: rgba(0, 123, 255, 0.1);
+    --zhazhasu-tech-border-dark: rgba(0, 123, 255, 0.3);
+    --zhazhasu-tech-border-focus: rgba(0, 123, 255, 0.5);
+    
+    /* 阴影色系 - 科技感多层阴影 */
+    --zhazhasu-tech-shadow-sm: 0 2px 8px rgba(0, 123, 255, 0.08);
+    --zhazhasu-tech-shadow: 0 4px 20px rgba(0, 123, 255, 0.12);
+    --zhazhasu-tech-shadow-lg: 0 8px 35px rgba(0, 123, 255, 0.15);
+    --zhazhasu-tech-shadow-xl: 0 15px 50px rgba(0, 123, 255, 0.18);
+    --zhazhasu-tech-shadow-neon: 0 0 20px rgba(0, 204, 255, 0.5);
+    
+    /* 圆角系统 */
+    --zhazhasu-tech-radius-sm: 6px;
+    --zhazhasu-tech-radius: 10px;
+    --zhazhasu-tech-radius-lg: 16px;
+    --zhazhasu-tech-radius-xl: 24px;
+    --zhazhasu-tech-radius-full: 50%;
+    
+    /* 过渡动画系统 */
+    --zhazhasu-tech-transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --zhazhasu-tech-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --zhazhasu-tech-transition-slow: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* 字体系统 */
+    --zhazhasu-tech-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --zhazhasu-tech-font-size-xs: 12px;
+    --zhazhasu-tech-font-size-sm: 14px;
+    --zhazhasu-tech-font-size: 16px;
+    --zhazhasu-tech-font-size-lg: 18px;
+    --zhazhasu-tech-font-size-xl: 20px;
+    --zhazhasu-tech-font-size-2xl: 24px;
+    
+    /* 间距系统 - 基于8px网格 */
+    --zhazhasu-tech-space-1: 4px;
+    --zhazhasu-tech-space-2: 8px;
+    --zhazhasu-tech-space-3: 12px;
+    --zhazhasu-tech-space-4: 16px;
+    --zhazhasu-tech-space-5: 20px;
+    --zhazhasu-tech-space-6: 24px;
+    --zhazhasu-tech-space-8: 32px;
+    --zhazhasu-tech-space-10: 40px;
+    
+    /* 组件尺寸系统 */
+    --zhazhasu-tech-component-height-sm: 32px;
+    --zhazhasu-tech-component-height: 40px;
+    --zhazhasu-tech-component-height-lg: 48px;
+    --zhazhasu-tech-component-height-xl: 56px;
+    
+    /* Z-index层级系统 */
+    --zhazhasu-tech-z-dropdown: 1000;
+    --zhazhasu-tech-z-modal: 1050;
+    --zhazhasu-tech-z-tooltip: 1070;
+    --zhazhasu-tech-z-notification: 1080;
+    
+    /* 动画配置 */
+    --zhazhasu-tech-animation-duration-fast: 0.2s;
+    --zhazhasu-tech-animation-duration: 0.3s;
+    --zhazhasu-tech-animation-duration-slow: 0.5s;
+    --zhazhasu-tech-animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* 毛玻璃效果 */
+    --zhazhasu-tech-backdrop-blur: blur(10px);
+    --zhazhasu-tech-backdrop-blur-lg: blur(20px);
+    
+    /* 渐变效果 */
+    --zhazhasu-tech-gradient-primary: linear-gradient(135deg, var(--zhazhasu-tech-primary) 0%, var(--zhazhasu-tech-primary-dark) 100%);
+    --zhazhasu-tech-gradient-secondary: linear-gradient(135deg, var(--zhazhasu-tech-secondary) 0%, var(--zhazhasu-tech-primary-dark) 100%);
+    --zhazhasu-tech-gradient-bg: linear-gradient(135deg, var(--zhazhasu-tech-bg-primary) 0%, var(--zhazhasu-tech-bg-secondary) 100%);
+    
+    /* 悬浮效果配置 */
+    --zhazhasu-tech-hover-transform: translateY(-2px);
+    --zhazhasu-tech-hover-shadow: var(--zhazhasu-tech-shadow-lg);
+    --zhazhasu-tech-active-transform: translateY(0);
+    
+    /* 焦点效果配置 */
+    --zhazhasu-tech-focus-outline: 0 0 0 3px var(--zhazhasu-tech-primary-light);
+    --zhazhasu-tech-focus-shadow: 0 0 0 2px var(--zhazhasu-tech-border-focus);
+}
+
+/* ==================== 动画开关变量 ==================== */
+:root {
+    /* 全局动画开关 - 可通过JavaScript动态控制 */
+    --zhazhasu-tech-animations-enabled: 1;
+    --zhazhasu-tech-hover-animations-enabled: 1;
+    --zhazhasu-tech-page-load-animations-enabled: 1;
+    --zhazhasu-tech-transition-animations-enabled: 1;
+}
+
+/* 动画禁用时的备用样式 */
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --zhazhasu-tech-animations-enabled: 0;
+        --zhazhasu-tech-hover-animations-enabled: 0;
+        --zhazhasu-tech-page-load-animations-enabled: 0;
+    }
+}
+
+/* ==================== 响应式变量 ==================== */
+/* 移动端变量调整 */
+@media (max-width: 768px) {
+    :root {
+        --zhazhasu-tech-font-size: 14px;
+        --zhazhasu-tech-font-size-lg: 16px;
+        --zhazhasu-tech-font-size-xl: 18px;
+        --zhazhasu-tech-component-height: 36px;
+        --zhazhasu-tech-component-height-lg: 44px;
+    }
+}
+
+/* 小屏幕变量调整 */
+@media (max-width: 480px) {
+    :root {
+        --zhazhasu-tech-font-size: 13px;
+        --zhazhasu-tech-font-size-lg: 15px;
+        --zhazhasu-tech-font-size-xl: 17px;
+        --zhazhasu-tech-component-height: 32px;
+        --zhazhasu-tech-component-height-lg: 40px;
+    }
+}

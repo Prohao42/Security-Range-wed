@@ -1,0 +1,498 @@
+/**
+ * Zhazhasu炸炸酥网安靱场团队 - 科技蓝UI组件库动画系统
+ * Tech Blue UI Component Library Animations
+ * 版本: v1.0.0
+ * 创建日期: 2025-11-11
+ * 团队: 炸炸酥网安靱场 (Zhazhasu)
+ * 描述: 科技蓝风格的动画和微交互效果
+ */
+
+/* ==================== 动画基础定义 ==================== */
+
+/* 动画检查类 - 当动画被禁用时应用 */
+.zhazhasu-tech-no-animations * {
+    animation: none !important;
+    transition: none !important;
+}
+
+/* ==================== 入场动画 ==================== */
+
+/* 淡入动画 */
+@keyframes zhazhasu-tech-fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes zhazhasu-tech-fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zhazhasu-tech-fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zhazhasu-tech-fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes zhazhasu-tech-fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 缩放动画 */
+@keyframes zhazhasu-tech-scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes zhazhasu-tech-scaleInUp {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* 旋转动画 */
+@keyframes zhazhasu-tech-rotateIn {
+    from {
+        opacity: 0;
+        transform: rotate(-180deg) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+    }
+}
+
+/* ==================== 悬停动画 ==================== */
+
+/* 悬停浮起效果 */
+@keyframes zhazhasu-tech-hoverLift {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-2px);
+    }
+}
+
+/* 悬停发光效果 */
+@keyframes zhazhasu-tech-hoverGlow {
+    0% {
+        box-shadow: var(--zhazhasu-tech-shadow);
+    }
+    100% {
+        box-shadow: var(--zhazhasu-tech-shadow-neon);
+    }
+}
+
+/* 悬停脉冲效果 */
+@keyframes zhazhasu-tech-hoverPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+/* ==================== 加载动画 ==================== */
+
+/* 旋转加载 */
+@keyframes zhazhasu-tech-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 脉冲加载 */
+@keyframes zhazhasu-tech-pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* 闪烁加载 */
+@keyframes zhazhasu-tech-blink {
+    0%, 50%, 100% {
+        opacity: 1;
+    }
+    25%, 75% {
+        opacity: 0;
+    }
+}
+
+/* 波纹扩散 */
+@keyframes zhazhasu-tech-ripple {
+    from {
+        transform: scale(0);
+        opacity: 1;
+    }
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* ==================== 科技特效动画 ==================== */
+
+/* 科技感扫描线 */
+@keyframes zhazhasu-tech-scanline {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+/* 科技感流动 */
+@keyframes zhazhasu-tech-flow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* 科技感闪烁 */
+@keyframes zhazhasu-tech-flicker {
+    0%, 100% {
+        opacity: 1;
+    }
+    10%, 30%, 50%, 70%, 90% {
+        opacity: 0.8;
+    }
+    20%, 40%, 60%, 80% {
+        opacity: 1;
+    }
+}
+
+/* ==================== 交互动画 ==================== */
+
+/* 按钮点击涟漪 */
+@keyframes zhazhasu-tech-buttonRipple {
+    from {
+        transform: scale(0);
+        opacity: 1;
+    }
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* 卡片翻转 */
+@keyframes zhazhasu-tech-cardFlip {
+    from {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    to {
+        transform: perspective(1000px) rotateY(180deg);
+    }
+}
+
+/* 弹窗弹出 */
+@keyframes zhazhasu-tech-modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* ==================== 动画工具类 ==================== */
+
+/* 动画控制类 */
+.zhazhasu-tech-animate-fadeIn {
+    animation: zhazhasu-tech-fadeIn var(--zhazhasu-tech-animation-duration) var(--zhazhasu-tech-animation-easing);
+}
+
+.zhazhasu-tech-animate-fadeInUp {
+    animation: zhazhasu-tech-fadeInUp var(--zhazhasu-tech-animation-duration) var(--zhazhasu-tech-animation-easing);
+}
+
+.zhazhasu-tech-animate-fadeInDown {
+    animation: zhazhasu-tech-fadeInDown var(--zhazhasu-tech-animation-duration) var(--zhazhasu-tech-animation-easing);
+}
+
+.zhazhasu-tech-animate-fadeInLeft {
+    animation: zhazhasu-tech-fadeInLeft var(--zhazhasu-tech-animation-duration) var(--zhazhasu-tech-animation-easing);
+}
+
+.zhazhasu-tech-animate-fadeInRight {
+    animation: zhazhasu-tech-fadeInRight var(--zhazhasu-tech-animation-duration) var(--zhazhasu-tech-animation-easing);
+}
+
+.zhazhasu-tech-animate-slideIn {
+    animation: zhazhasu-tech-fadeInRight var(--zhazhasu-tech-animation-duration) var(--zhazhasu-tech-animation-easing);
+}
+
+.zhazhasu-tech-animate-scaleIn {
+    animation: zhazhasu-tech-scaleIn var(--zhazhasu-tech-animation-duration) var(--zhazhasu-tech-animation-easing);
+}
+
+.zhazhasu-tech-animate-rotateIn {
+    animation: zhazhasu-tech-rotateIn var(--zhazhasu-tech-animation-duration) var(--zhazhasu-tech-animation-easing);
+}
+
+/* 延迟动画类 */
+.zhazhasu-tech-animate-delay-1 {
+    animation-delay: 0.1s;
+}
+
+.zhazhasu-tech-animate-delay-2 {
+    animation-delay: 0.2s;
+}
+
+.zhazhasu-tech-animate-delay-3 {
+    animation-delay: 0.3s;
+}
+
+.zhazhasu-tech-animate-delay-4 {
+    animation-delay: 0.4s;
+}
+
+.zhazhasu-tech-animate-delay-5 {
+    animation-delay: 0.5s;
+}
+
+/* ==================== 页面加载动画样式 ==================== */
+
+/* 页面内容渐入 */
+.zhazhasu-tech-page-animate .zhazhasu-tech-card {
+    animation: zhazhasu-tech-fadeInUp 0.6s ease-out;
+    animation-fill-mode: both;
+}
+
+.zhazhasu-tech-page-animate .zhazhasu-tech-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.zhazhasu-tech-page-animate .zhazhasu-tech-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.zhazhasu-tech-page-animate .zhazhasu-tech-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.zhazhasu-tech-page-animate .zhazhasu-tech-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+/* ==================== 悬停效果样式 ==================== */
+
+/* 基础悬停效果 */
+.zhazhasu-tech-hover-lift:hover {
+    transform: var(--zhazhasu-tech-hover-transform);
+    transition: var(--zhazhasu-tech-transition);
+}
+
+.zhazhasu-tech-hover-glow:hover {
+    box-shadow: var(--zhazhasu-tech-shadow-neon);
+    transition: var(--zhazhasu-tech-transition);
+}
+
+.zhazhasu-tech-hover-scale:hover {
+    transform: scale(1.02);
+    transition: var(--zhazhasu-tech-transition);
+}
+
+/* 科技感悬停效果 */
+.zhazhasu-tech-hover-tech:hover {
+    background: var(--zhazhasu-tech-gradient-primary);
+    border-color: var(--zhazhasu-tech-primary-dark);
+    box-shadow: var(--zhazhasu-tech-shadow-neon);
+    transition: var(--zhazhasu-tech-transition);
+}
+
+/* ==================== 加载状态动画 ==================== */
+
+/* 加载指示器 */
+.zhazhasu-tech-loading::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid var(--zhazhasu-tech-border);
+    border-top-color: var(--zhazhasu-tech-primary);
+    border-radius: var(--zhazhasu-tech-radius-full);
+    animation: zhazhasu-tech-spin 1s linear infinite;
+}
+
+.zhazhasu-tech-loading-sm::before {
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+    border-width: 1.5px;
+}
+
+.zhazhasu-tech-loading-lg::before {
+    width: 24px;
+    height: 24px;
+    margin: -12px 0 0 -12px;
+    border-width: 3px;
+}
+
+/* 进度条动画 */
+.zhazhasu-tech-progress-bar {
+    position: relative;
+    overflow: hidden;
+    background: var(--zhazhasu-tech-bg-tertiary);
+}
+
+.zhazhasu-tech-progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: zhazhasu-tech-flow 2s ease-in-out infinite;
+}
+
+/* ==================== 科技特效样式 ==================== */
+
+/* 扫描线效果 */
+.zhazhasu-tech-scanline {
+    position: relative;
+    overflow: hidden;
+}
+
+.zhazhasu-tech-scanline::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--zhazhasu-tech-primary), transparent);
+    animation: zhazhasu-tech-scanline 3s linear infinite;
+}
+
+/* 发光边框效果 */
+.zhazhasu-tech-glow-border {
+    position: relative;
+    border: 2px solid transparent;
+    background: linear-gradient(var(--zhazhasu-tech-bg-primary), var(--zhazhasu-tech-bg-primary)) padding-box,
+                var(--zhazhasu-tech-gradient-primary) border-box;
+}
+
+.zhazhasu-tech-glow-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: var(--zhazhasu-tech-gradient-primary);
+    filter: blur(8px);
+    opacity: 0;
+    transition: var(--zhazhasu-tech-transition);
+    z-index: -1;
+}
+
+.zhazhasu-tech-glow-border:hover::before {
+    opacity: 0.8;
+}
+
+/* ==================== 响应式动画优化 ==================== */
+
+/* 移动端动画优化 */
+@media (max-width: 768px) {
+    :root {
+        --zhazhasu-tech-animation-duration: 0.2s;
+        --zhazhasu-tech-animation-easing: ease-out;
+    }
+    
+    /* 禁用复杂动画 */
+    .zhazhasu-tech-mobile-no-animation * {
+        animation: none !important;
+        transform: none !important;
+    }
+}
+
+/* 减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ==================== 性能优化类 ==================== */
+
+/* GPU加速 */
+.zhazhasu-tech-gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* 包含布局 */
+.zhazhasu-tech-will-change-transform {
+    will-change: transform;
+}
+
+/* 包含透明度 */
+.zhazhasu-tech-will-change-opacity {
+    will-change: opacity;
+}

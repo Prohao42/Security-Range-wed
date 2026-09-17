@@ -1,0 +1,15 @@
+{
+  "database": {
+    "host": "db",
+    "port": 3306,
+    "username": "root",
+    "password": "root",
+    "charset": "utf8mb4"
+  },
+  "initialization": {
+    "check_range_databases": true,
+    "show_uninitialized_ranges": true
+  },
+  "version": "1.01",
+  "description": "Zhazhasu 靶场 - 容器环境数据库配置（host 指向 compose 服务名 db）"
+}

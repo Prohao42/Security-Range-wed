@@ -1,0 +1,1070 @@
+/**
+ * Zhazhasu炸炸酥网安靱场团队 - 科技蓝UI组件库
+ * Tech Blue UI Component Library
+ * 版本: v1.0.0
+ * 创建日期: 2025-11-11
+ * 团队: 炸炸酥网安靱场 (Zhazhasu)
+ * 描述: 基于科技蓝风格的完整UI组件库
+ */
+
+/* 引入变量和动画 */
+@import url('./zhazhasu-tech-blue-variables.css');
+@import url('./zhazhasu-tech-blue-animations.css');
+
+/* ==================== 基础样式重置 ==================== */
+.zhazhasu-tech *,
+.zhazhasu-tech *::before,
+.zhazhasu-tech *::after {
+    box-sizing: border-box;
+}
+
+.zhazhasu-tech {
+    font-family: var(--zhazhasu-tech-font-family);
+    line-height: 1.6;
+    color: var(--zhazhasu-tech-text-primary);
+    background: var(--zhazhasu-tech-bg-gradient);
+    min-height: 100vh;
+}
+
+/* ==================== 卡片组件 ==================== */
+.zhazhasu-tech-card {
+    background: var(--zhazhasu-tech-bg-primary);
+    border: 1px solid var(--zhazhasu-tech-border);
+    border-radius: var(--zhazhasu-tech-radius-lg);
+    box-shadow: var(--zhazhasu-tech-shadow);
+    backdrop-filter: var(--zhazhasu-tech-backdrop-blur);
+    overflow: hidden;
+    transition: var(--zhazhasu-tech-transition);
+    position: relative;
+}
+
+/* 卡片顶部装饰线已移除 */
+
+/* 卡片悬停效果 */
+.zhazhasu-tech-card:hover {
+    transform: var(--zhazhasu-tech-hover-transform);
+    box-shadow: var(--zhazhasu-tech-shadow-lg);
+    border-color: var(--zhazhasu-tech-border-dark);
+}
+
+/* 卡片头部 */
+.zhazhasu-tech-card-header {
+    background: var(--zhazhasu-tech-bg-secondary);
+    padding: var(--zhazhasu-tech-space-5) var(--zhazhasu-tech-space-6);
+    border-bottom: 1px solid var(--zhazhasu-tech-border);
+    position: relative;
+}
+
+.zhazhasu-tech-card-title {
+    margin: 0;
+    color: var(--zhazhasu-tech-primary);
+    font-size: var(--zhazhasu-tech-font-size-xl);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: var(--zhazhasu-tech-space-2);
+    text-shadow: 0 1px 2px rgba(0, 123, 255, 0.1);
+}
+
+.zhazhasu-tech-card-title i {
+    color: var(--zhazhasu-tech-primary);
+    opacity: 0.8;
+}
+
+.zhazhasu-tech-card-subtitle {
+    margin: var(--zhazhasu-tech-space-1) 0 0 0;
+    color: var(--zhazhasu-tech-text-muted);
+    font-size: var(--zhazhasu-tech-font-size-sm);
+    font-weight: 400;
+}
+
+/* 卡片内容区 */
+.zhazhasu-tech-card-body {
+    padding: var(--zhazhasu-tech-space-6);
+}
+
+/* 卡片底部 */
+.zhazhasu-tech-card-footer {
+    padding: var(--zhazhasu-tech-space-4) var(--zhazhasu-tech-space-6) var(--zhazhasu-tech-space-5);
+    background: var(--zhazhasu-tech-bg-secondary);
+    border-top: 1px solid var(--zhazhasu-tech-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ==================== 按钮组件 ==================== */
+.zhazhasu-tech-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    min-height: 44px;
+    background: var(--zhazhasu-tech-bg-primary);
+    color: var(--zhazhasu-tech-text-primary);
+    border: 1px solid var(--zhazhasu-tech-border);
+}
+
+/* 按钮光波效果 */
+.zhazhasu-tech-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.zhazhasu-tech-btn:hover::before {
+    left: 100%;
+}
+
+/* 按钮尺寸变体 */
+.zhazhasu-tech-btn-sm {
+    padding: var(--zhazhasu-tech-space-2) var(--zhazhasu-tech-space-3);
+    font-size: var(--zhazhasu-tech-font-size-sm);
+    min-height: var(--zhazhasu-tech-component-height-sm);
+}
+
+.zhazhasu-tech-btn-lg {
+    padding: var(--zhazhasu-tech-space-4) var(--zhazhasu-tech-space-6);
+    font-size: var(--zhazhasu-tech-font-size-lg);
+    min-height: var(--zhazhasu-tech-component-height-lg);
+}
+
+/* 按钮类型变体 */
+.zhazhasu-tech-btn-primary {
+    background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+    color: white;
+    border: 1px solid var(--zhazhasu-tech-primary);
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.zhazhasu-tech-btn-primary:hover {
+    background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+}
+
+.zhazhasu-tech-btn-success {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    border: 1px solid var(--zhazhasu-tech-success);
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.zhazhasu-tech-btn-success:hover {
+    background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+}
+
+.zhazhasu-tech-btn-warning {
+    background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+    color: white;
+    border: 1px solid var(--zhazhasu-tech-warning);
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+}
+
+.zhazhasu-tech-btn-warning:hover {
+    background: linear-gradient(135deg, #e0a800 0%, #dc6502 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
+}
+
+.zhazhasu-tech-btn-danger {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+    border: 1px solid var(--zhazhasu-tech-danger);
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+}
+
+.zhazhasu-tech-btn-danger:hover {
+    background: linear-gradient(135deg, #c82333 0%, #bd2130 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+}
+
+.zhazhasu-tech-btn-info {
+    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+    color: white;
+    border: 1px solid var(--zhazhasu-tech-info);
+    box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
+}
+
+.zhazhasu-tech-btn-info:hover {
+    background: linear-gradient(135deg, #138496 0%, #117a8b 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(23, 162, 184, 0.4);
+}
+
+/* 次要按钮样式 */
+.zhazhasu-tech-btn-secondary {
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    color: white;
+    border: 1px solid #6c757d;
+    box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+}
+
+.zhazhasu-tech-btn-secondary:hover {
+    background: linear-gradient(135deg, #495057 0%, #343a40 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
+}
+
+/* 按钮禁用状态 */
+.zhazhasu-tech-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* ==================== 提示框组件 ==================== */
+.alert {
+    padding: 16px 20px;
+    border-radius: 8px;
+    border-left: 4px solid;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    min-height: 60px;
+}
+
+.alert:hover {
+    transform: translateX(2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.alert-success {
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.08) 0%, rgba(40, 167, 69, 0.04) 100%);
+    border-left-color: #28a745;
+    color: #155724;
+}
+
+.alert-success i {
+    color: #28a745;
+    font-size: 18px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+}
+
+.alert-warning {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.08) 0%, rgba(255, 193, 7, 0.04) 100%);
+    border-left-color: #ffc107;
+    color: #856404;
+}
+
+.alert-warning i {
+    color: #ffc107;
+    font-size: 18px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+}
+
+.alert-error {
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.08) 0%, rgba(220, 53, 69, 0.04) 100%);
+    border-left-color: #dc3545;
+    color: #721c24;
+}
+
+.alert-error i {
+    color: #dc3545;
+    font-size: 18px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, rgba(23, 162, 184, 0.08) 0%, rgba(23, 162, 184, 0.04) 100%);
+    border-left-color: #17a2b8;
+    color: #0c5460;
+}
+
+.alert-info i {
+    color: #17a2b8;
+    font-size: 18px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+}
+
+.alert strong {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+    font-size: 15px;
+}
+
+.alert div {
+    flex: 1;
+    line-height: 1.5;
+}
+
+/* 关闭按钮样式 */
+.zhazhasu-tech-alert-close {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+    opacity: 0.7;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.zhazhasu-tech-alert-close:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    opacity: 1;
+}
+
+/* ==================== 动态提示框组件样式 ==================== */
+.zhazhasu-tech-alert-container {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 10001;
+    pointer-events: none;
+}
+
+.zhazhasu-tech-alert-container > * {
+    pointer-events: auto;
+}
+
+.zhazhasu-tech-alert-container .zhazhasu-tech-alert {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 25px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 10001;
+    opacity: 0;
+    transition: all 0.3s ease;
+    min-width: 300px;
+    max-width: 80%;
+    width: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    word-wrap: break-word;
+    white-space: normal;
+    margin-bottom: var(--zhazhasu-tech-space-2);
+}
+
+/* 类型特定样式 - 覆盖默认背景 */
+.zhazhasu-tech-alert-container .zhazhasu-tech-alert.zhazhasu-tech-alert-success {
+    background: linear-gradient(135deg, #28a745, #1e7e34) !important;
+    color: white !important;
+    border: none;
+}
+
+.zhazhasu-tech-alert-container .zhazhasu-tech-alert.zhazhasu-tech-alert-warning {
+    background: linear-gradient(135deg, #ffc107, #e0a800) !important;
+    color: #212529 !important;
+    border: none;
+}
+
+.zhazhasu-tech-alert-container .zhazhasu-tech-alert.zhazhasu-tech-alert-danger {
+    background: linear-gradient(135deg, #dc3545, #c82333) !important;
+    color: white !important;
+    border: none;
+}
+
+.zhazhasu-tech-alert-container .zhazhasu-tech-alert.zhazhasu-tech-alert-info {
+    background: linear-gradient(135deg, #17a2b8, #138496) !important;
+    color: white !important;
+    border: none;
+}
+
+.zhazhasu-tech-alert {
+    background: #ffffff;
+    border-radius: var(--zhazhasu-tech-radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: var(--zhazhasu-tech-space-4);
+    margin-bottom: var(--zhazhasu-tech-space-2);
+    min-width: 300px;
+    max-width: 400px;
+    border-left: 4px solid var(--zhazhasu-tech-primary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    min-height: auto;
+    gap: var(--zhazhasu-tech-space-3);
+}
+
+
+.zhazhasu-tech-alert-icon {
+    flex-shrink: 0;
+    margin-right: var(--zhazhasu-tech-space-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.zhazhasu-tech-alert-content {
+    line-height: 1.5;
+    flex: 1;
+    text-align: left;
+}
+
+.zhazhasu-tech-alert-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 15px;
+}
+
+.zhazhasu-tech-alert-message {
+    font-size: 14px;
+}
+
+/* Toast header样式 - 与后台保持一致 */
+.zhazhasu-tech-alert-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.zhazhasu-tech-alert-close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #6b7280;
+    padding: 4px;
+    line-height: 1;
+    margin-left: var(--zhazhasu-tech-space-2);
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.zhazhasu-tech-alert-close:hover {
+    color: #374151;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* 动态提示框类型样式 */
+.zhazhasu-tech-alert-success {
+    background: linear-gradient(135deg, #28a745, #1e7e34);
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.zhazhasu-tech-alert-success .zhazhasu-tech-alert-content {
+    color: white;
+}
+
+.zhazhasu-tech-alert-success .zhazhasu-tech-alert-close {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.zhazhasu-tech-alert-success .zhazhasu-tech-alert-close:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.zhazhasu-tech-alert-warning {
+    background: linear-gradient(135deg, #ffc107, #e0a800);
+    color: #212529;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.zhazhasu-tech-alert-warning .zhazhasu-tech-alert-content {
+    color: #212529;
+}
+
+.zhazhasu-tech-alert-warning .zhazhasu-tech-alert-close {
+    color: rgba(33, 37, 41, 0.7);
+}
+
+.zhazhasu-tech-alert-warning .zhazhasu-tech-alert-close:hover {
+    color: #212529;
+    background-color: rgba(33, 37, 41, 0.1);
+}
+
+.zhazhasu-tech-alert-danger {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.zhazhasu-tech-alert-danger .zhazhasu-tech-alert-content {
+    color: white;
+}
+
+.zhazhasu-tech-alert-danger .zhazhasu-tech-alert-close {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.zhazhasu-tech-alert-danger .zhazhasu-tech-alert-close:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.zhazhasu-tech-alert-info {
+    background: linear-gradient(135deg, #17a2b8, #138496);
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.zhazhasu-tech-alert-info .zhazhasu-tech-alert-content {
+    color: white;
+}
+
+.zhazhasu-tech-alert-info .zhazhasu-tech-alert-close {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.zhazhasu-tech-alert-info .zhazhasu-tech-alert-close:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* 提示框动画 */
+@keyframes zhazhasu-tech-alertSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes zhazhasu-slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.zhazhasu-tech-alert.zhazhasu-tech-animate-fadeInDown {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* 支持show/hide状态的动画 */
+.zhazhasu-tech-alert.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.zhazhasu-tech-alert.hide {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+}
+
+/* 兼容旧样式 - 保持向后兼容 */
+.zhazhasu-tech-alert-success {
+    /* 与上面定义的样式保持一致 */
+}
+
+.zhazhasu-tech-alert-warning {
+    /* 与上面定义的样式保持一致 */
+}
+
+.zhazhasu-tech-alert-danger {
+    /* 与上面定义的样式保持一致 */
+}
+
+.zhazhasu-tech-alert-info {
+    /* 与上面定义的样式保持一致 */
+}
+
+
+/* ==================== 表单组件 ==================== */
+.zhazhasu-tech-form-group {
+    margin-bottom: var(--zhazhasu-tech-space-5);
+}
+
+.zhazhasu-tech-form-label {
+    display: block;
+    margin-bottom: var(--zhazhasu-tech-space-2);
+    font-weight: 500;
+    color: var(--zhazhasu-tech-text-primary);
+    font-size: var(--zhazhasu-tech-font-size-sm);
+}
+
+.zhazhasu-tech-form-label .required {
+    color: var(--zhazhasu-tech-danger);
+    margin-left: var(--zhazhasu-tech-space-1);
+}
+
+.zhazhasu-tech-form-label i {
+    color: var(--zhazhasu-tech-primary);
+    margin-right: var(--zhazhasu-tech-space-2);
+    font-size: var(--zhazhasu-tech-font-size-sm);
+}
+
+.zhazhasu-tech-form-input,
+.zhazhasu-tech-form-textarea,
+.zhazhasu-tech-form-select {
+    width: 100%;
+    padding: var(--zhazhasu-tech-space-3) var(--zhazhasu-tech-space-4);
+    border: 1px solid var(--zhazhasu-tech-border);
+    border-radius: var(--zhazhasu-tech-radius);
+    font-size: var(--zhazhasu-tech-font-size);
+    background: var(--zhazhasu-tech-bg-primary);
+    color: var(--zhazhasu-tech-text-primary);
+    transition: var(--zhazhasu-tech-transition);
+    outline: none;
+    min-height: var(--zhazhasu-tech-component-height);
+}
+
+.zhazhasu-tech-form-input:focus,
+.zhazhasu-tech-form-textarea:focus,
+.zhazhasu-tech-form-select:focus {
+    border-color: var(--zhazhasu-tech-primary);
+    box-shadow: var(--zhazhasu-tech-focus-outline);
+    background: white;
+}
+
+.zhazhasu-tech-form-input::placeholder,
+.zhazhasu-tech-form-textarea::placeholder {
+    color: var(--zhazhasu-tech-text-muted);
+}
+
+.zhazhasu-tech-form-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* 表单尺寸变体 */
+.zhazhasu-tech-form-sm .zhazhasu-tech-form-input,
+.zhazhasu-tech-form-sm .zhazhasu-tech-form-textarea,
+.zhazhasu-tech-form-sm .zhazhasu-tech-form-select {
+    padding: var(--zhazhasu-tech-space-2) var(--zhazhasu-tech-space-3);
+    font-size: var(--zhazhasu-tech-font-size-sm);
+    min-height: var(--zhazhasu-tech-component-height-sm);
+}
+
+.zhazhasu-tech-form-lg .zhazhasu-tech-form-input,
+.zhazhasu-tech-form-lg .zhazhasu-tech-form-textarea,
+.zhazhasu-tech-form-lg .zhazhasu-tech-form-select {
+    padding: var(--zhazhasu-tech-space-4) var(--zhazhasu-tech-space-5);
+    font-size: var(--zhazhasu-tech-font-size-lg);
+    min-height: var(--zhazhasu-tech-component-height-lg);
+}
+
+/* 复选框和单选框 */
+.zhazhasu-tech-checkbox,
+.zhazhasu-tech-radio {
+    display: flex;
+    align-items: center;
+    gap: var(--zhazhasu-tech-space-2);
+    margin-bottom: var(--zhazhasu-tech-space-2);
+    cursor: pointer;
+}
+
+.zhazhasu-tech-checkbox input,
+.zhazhasu-tech-radio input {
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--zhazhasu-tech-border);
+    background: var(--zhazhasu-tech-bg-primary);
+    cursor: pointer;
+    transition: var(--zhazhasu-tech-transition);
+    accent-color: var(--zhazhasu-tech-primary);
+}
+
+
+/* ==================== 表格组件 ==================== */
+.zhazhasu-tech-table-container {
+    background: var(--zhazhasu-tech-bg-primary);
+    border: 1px solid var(--zhazhasu-tech-border);
+    border-radius: var(--zhazhasu-tech-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--zhazhasu-tech-shadow);
+}
+
+.zhazhasu-tech-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: transparent;
+}
+
+.zhazhasu-tech-table th,
+.zhazhasu-tech-table td {
+    padding: var(--zhazhasu-tech-space-3) var(--zhazhasu-tech-space-4);
+    text-align: left;
+    border-bottom: 1px solid var(--zhazhasu-tech-border);
+}
+
+.zhazhasu-tech-table th {
+    background: var(--zhazhasu-tech-bg-secondary);
+    font-weight: 600;
+    color: var(--zhazhasu-tech-text-primary);
+    font-size: var(--zhazhasu-tech-font-size-sm);
+    position: relative;
+}
+
+.zhazhasu-tech-table th::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--zhazhasu-tech-border);
+}
+
+.zhazhasu-tech-table tbody tr {
+    transition: var(--zhazhasu-tech-transition);
+}
+
+.zhazhasu-tech-table tbody tr:hover {
+    background: var(--zhazhasu-tech-bg-tertiary);
+}
+
+.zhazhasu-tech-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.zhazhasu-tech-table td {
+    color: var(--zhazhasu-tech-text-secondary);
+    font-size: var(--zhazhasu-tech-font-size-sm);
+}
+
+/* 表格状态样式 */
+.zhazhasu-tech-table .success td {
+    background: rgba(40, 167, 69, 0.1);
+    color: var(--zhazhasu-tech-success);
+}
+
+.zhazhasu-tech-table .warning td {
+    background: rgba(255, 193, 7, 0.1);
+    color: var(--zhazhasu-tech-warning);
+}
+
+.zhazhasu-tech-table .danger td {
+    background: rgba(220, 53, 69, 0.1);
+    color: var(--zhazhasu-tech-danger);
+}
+
+/* ==================== 可折叠区域组件 ==================== */
+.zhazhasu-tech-collapse {
+    border: 1px solid var(--zhazhasu-tech-border);
+    border-radius: var(--zhazhasu-tech-radius);
+    overflow: hidden;
+    background: var(--zhazhasu-tech-bg-primary);
+}
+
+.zhazhasu-tech-collapse-item {
+    border-bottom: 1px solid var(--zhazhasu-tech-border);
+}
+
+.zhazhasu-tech-collapse-item:last-child {
+    border-bottom: none;
+}
+
+.zhazhasu-tech-collapse-header {
+    padding: var(--zhazhasu-tech-space-4) var(--zhazhasu-tech-space-5);
+    background: var(--zhazhasu-tech-bg-secondary);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--zhazhasu-tech-transition);
+    user-select: none;
+}
+
+.zhazhasu-tech-collapse-header:hover {
+    background: var(--zhazhasu-tech-bg-tertiary);
+}
+
+.zhazhasu-tech-collapse-title {
+    font-weight: 500;
+    color: var(--zhazhasu-tech-text-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--zhazhasu-tech-space-2);
+}
+
+.zhazhasu-tech-collapse-title i {
+    color: var(--zhazhasu-tech-primary);
+    font-size: var(--zhazhasu-tech-font-size);
+    width: 16px;
+    text-align: center;
+}
+
+.zhazhasu-tech-collapse-arrow {
+    transition: transform 0.3s ease;
+    color: var(--zhazhasu-tech-text-muted);
+    font-size: var(--zhazhasu-tech-font-size-xs);
+}
+
+.zhazhasu-tech-collapse-item.active .zhazhasu-tech-collapse-arrow {
+    transform: rotate(180deg);
+}
+
+.zhazhasu-tech-collapse-content {
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--zhazhasu-tech-transition), padding var(--zhazhasu-tech-transition);
+}
+
+.zhazhasu-tech-collapse-item.active .zhazhasu-tech-collapse-content {
+    padding: var(--zhazhasu-tech-space-5);
+    max-height: 1000px;
+}
+
+.zhazhasu-tech-collapse-body {
+    color: var(--zhazhasu-tech-text-secondary);
+    line-height: 1.6;
+}
+
+/* 禁用状态 */
+.zhazhasu-tech-collapse-item.disabled .zhazhasu-tech-collapse-header {
+    cursor: not-allowed;
+    opacity: 0.6;
+    background: var(--zhazhasu-tech-bg-disabled);
+}
+
+.zhazhasu-tech-collapse-item.disabled .zhazhasu-tech-collapse-header:hover {
+    background: var(--zhazhasu-tech-bg-disabled);
+}
+
+.zhazhasu-tech-collapse-item.disabled .zhazhasu-tech-collapse-title {
+    color: var(--zhazhasu-tech-text-muted);
+}
+
+/* ==================== 徽章组件 ==================== */
+.zhazhasu-tech-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--zhazhasu-tech-space-1) var(--zhazhasu-tech-space-3);
+    border-radius: var(--zhazhasu-tech-radius-full);
+    font-size: var(--zhazhasu-tech-font-size-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: var(--zhazhasu-tech-primary);
+    color: var(--zhazhasu-tech-text-inverse);
+}
+
+.zhazhasu-tech-badge-success {
+    background: var(--zhazhasu-tech-success);
+}
+
+.zhazhasu-tech-badge-warning {
+    background: var(--zhazhasu-tech-warning);
+    color: var(--zhazhasu-tech-text-primary);
+}
+
+.zhazhasu-tech-badge-danger {
+    background: var(--zhazhasu-tech-danger);
+}
+
+.zhazhasu-tech-badge-info {
+    background: var(--zhazhasu-tech-info);
+}
+
+.zhazhasu-tech-badge-secondary {
+    background: var(--zhazhasu-tech-bg-secondary);
+    color: var(--zhazhasu-tech-text-primary);
+    border: 1px solid var(--zhazhasu-tech-border);
+}
+
+/* ==================== 工具类 ==================== */
+/* 文本对齐 */
+.zhazhasu-tech-text-center { text-align: center; }
+.zhazhasu-tech-text-left { text-align: left; }
+.zhazhasu-tech-text-right { text-align: right; }
+
+/* 显示控制 */
+.zhazhasu-tech-d-flex { display: flex; }
+.zhazhasu-tech-d-block { display: block; }
+.zhazhasu-tech-d-inline { display: inline; }
+.zhazhasu-tech-d-inline-block { display: inline-block; }
+.zhazhasu-tech-d-none { display: none; }
+
+/* Flexbox */
+.zhazhasu-tech-flex-column { flex-direction: column; }
+.zhazhasu-tech-flex-row { flex-direction: row; }
+.zhazhasu-tech-justify-center { justify-content: center; }
+.zhazhasu-tech-justify-between { justify-content: space-between; }
+.zhazhasu-tech-justify-around { justify-content: space-around; }
+.zhazhasu-tech-align-center { align-items: center; }
+.zhazhasu-tech-align-start { align-items: flex-start; }
+.zhazhasu-tech-align-end { align-items: flex-end; }
+
+/* 间距工具类 */
+.zhazhasu-tech-m-0 { margin: 0; }
+.zhazhasu-tech-m-1 { margin: var(--zhazhasu-tech-space-1); }
+.zhazhasu-tech-m-2 { margin: var(--zhazhasu-tech-space-2); }
+.zhazhasu-tech-m-3 { margin: var(--zhazhasu-tech-space-3); }
+.zhazhasu-tech-m-4 { margin: var(--zhazhasu-tech-space-4); }
+
+.zhazhasu-tech-mt-0 { margin-top: 0; }
+.zhazhasu-tech-mt-1 { margin-top: var(--zhazhasu-tech-space-1); }
+.zhazhasu-tech-mt-2 { margin-top: var(--zhazhasu-tech-space-2); }
+.zhazhasu-tech-mt-3 { margin-top: var(--zhazhasu-tech-space-3); }
+.zhazhasu-tech-mt-4 { margin-top: var(--zhazhasu-tech-space-4); }
+
+.zhazhasu-tech-mb-0 { margin-bottom: 0; }
+.zhazhasu-tech-mb-1 { margin-bottom: var(--zhazhasu-tech-space-1); }
+.zhazhasu-tech-mb-2 { margin-bottom: var(--zhazhasu-tech-space-2); }
+.zhazhasu-tech-mb-3 { margin-bottom: var(--zhazhasu-tech-space-3); }
+.zhazhasu-tech-mb-4 { margin-bottom: var(--zhazhasu-tech-space-4); }
+
+.zhazhasu-tech-p-0 { padding: 0; }
+.zhazhasu-tech-p-1 { padding: var(--zhazhasu-tech-space-1); }
+.zhazhasu-tech-p-2 { padding: var(--zhazhasu-tech-space-2); }
+.zhazhasu-tech-p-3 { padding: var(--zhazhasu-tech-space-3); }
+.zhazhasu-tech-p-4 { padding: var(--zhazhasu-tech-space-4); }
+
+/* ==================== 响应式设计 ==================== */
+/* 平板设备 */
+@media (max-width: 768px) {
+    .zhazhasu-tech-card-header {
+        padding: var(--zhazhasu-tech-space-4) var(--zhazhasu-tech-space-5);
+    }
+
+    .zhazhasu-tech-card-title {
+        font-size: var(--zhazhasu-tech-font-size-lg);
+    }
+
+    .zhazhasu-tech-card-body {
+        padding: var(--zhazhasu-tech-space-5);
+    }
+
+    .zhazhasu-tech-alert {
+        padding: var(--zhazhasu-tech-space-3) var(--zhazhasu-tech-space-4);
+        flex-direction: column;
+        text-align: center;
+        gap: var(--zhazhasu-tech-space-2);
+    }
+
+    .zhazhasu-tech-table-container {
+        overflow-x: auto;
+    }
+
+    .zhazhasu-tech-table {
+        min-width: 600px;
+    }
+
+    .zhazhasu-tech-table th,
+    .zhazhasu-tech-table td {
+        padding: var(--zhazhasu-tech-space-2) var(--zhazhasu-tech-space-3);
+        font-size: var(--zhazhasu-tech-font-size-xs);
+    }
+
+  }
+
+/* 手机设备 */
+@media (max-width: 480px) {
+    .zhazhasu-tech-card-header {
+        padding: var(--zhazhasu-tech-space-3) var(--zhazhasu-tech-space-4);
+    }
+
+    .zhazhasu-tech-card-title {
+        font-size: var(--zhazhasu-tech-font-size);
+    }
+
+    .zhazhasu-tech-card-body {
+        padding: var(--zhazhasu-tech-space-4);
+    }
+
+    
+  }
+
+/* ==================== 深色模式适配 ==================== */
+@media (prefers-color-scheme: dark) {
+    .zhazhasu-tech-card {
+        background: rgba(30, 40, 50, 0.95);
+        border-color: rgba(0, 123, 255, 0.3);
+    }
+
+    .zhazhasu-tech-card-header {
+        background: rgba(20, 30, 40, 0.9);
+    }
+
+    .zhazhasu-tech-alert {
+        background: rgba(40, 50, 60, 0.8);
+    }
+
+    .zhazhasu-tech-form-input,
+    .zhazhasu-tech-form-textarea,
+    .zhazhasu-tech-form-select {
+        background: rgba(40, 50, 60, 0.9);
+        color: #e9ecef;
+    }
+}
+
+/* ==================== 滚动条样式 ==================== */
+.zhazhasu-tech::-webkit-scrollbar {
+    width: 6px;
+}
+
+.zhazhasu-tech::-webkit-scrollbar-track {
+    background: var(--zhazhasu-tech-bg-tertiary);
+    border-radius: 3px;
+}
+
+.zhazhasu-tech::-webkit-scrollbar-thumb {
+    background: var(--zhazhasu-tech-primary);
+    border-radius: 3px;
+    opacity: 0.6;
+}
+
+.zhazhasu-tech::-webkit-scrollbar-thumb:hover {
+    background: var(--zhazhasu-tech-primary-dark);
+    opacity: 0.8;
+}

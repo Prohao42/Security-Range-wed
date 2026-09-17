@@ -1,0 +1,474 @@
+/**
+ * Zhazhasu炸炸酥网安靱场团队 - 越权访问综合实战靶场样式
+ * 版本: v1.0.0
+ * 团队: 炸炸酥网安靱场 (Zhazhasu)
+ */
+
+.zhazhasu-privesc-layout {
+    align-items: flex-start;
+}
+
+.zhazhasu-privesc-main {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+    min-height: min-content;
+    padding-bottom: 20px;
+    /* 给底部阴影留出空间 */
+}
+
+.zhazhasu-privesc-side {
+    flex: 0 0 500px;
+    max-width: 500px;
+    width: 500px;
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
+}
+
+.zhazhasu-panel-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.is-hidden {
+    display: none !important;
+}
+
+/* 防止登录卡片由于外层弹性盒子布局被截断 */
+.zhazhasu-privesc-main .tech-card {
+    flex-shrink: 0;
+    flex-basis: auto;
+    min-height: min-content;
+    margin-bottom: 20px;
+    /* 预留底部阴影空间 */
+}
+
+/* 限制未登录时登录面板的宽度，防止过度拉伸影响美观 */
+#guestPanel {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.zhazhasu-privesc-banner {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.zhazhasu-privesc-banner h4 {
+    margin: 0 0 8px;
+    color: var(--zhazhasu-primary-color);
+}
+
+.zhazhasu-privesc-banner p {
+    margin: 0;
+    color: #495057;
+}
+
+.zhazhasu-privesc-admin-seed {
+    min-width: 280px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 123, 255, 0.15);
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.zhazhasu-privesc-admin-seed span {
+    color: #6c757d;
+    font-size: 13px;
+}
+
+.zhazhasu-privesc-admin-seed strong,
+.zhazhasu-privesc-admin-seed code {
+    font-family: 'Courier New', monospace;
+    word-break: break-all;
+}
+
+.zhazhasu-form-switch {
+    margin: 14px 0 0;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.zhazhasu-user-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.zhazhasu-user-summary-label {
+    display: block;
+    color: #6c757d;
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.zhazhasu-data-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.zhazhasu-data-grid>div,
+.zhazhasu-address-box p {
+    margin: 0;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 123, 255, 0.1);
+}
+
+.zhazhasu-data-grid span,
+.zhazhasu-address-box span,
+.zhazhasu-avatar-filename {
+    color: #6c757d;
+}
+
+.zhazhasu-data-grid strong,
+.zhazhasu-address-box strong {
+    display: block;
+    margin-top: 6px;
+    color: #212529;
+    word-break: break-word;
+}
+
+.zhazhasu-select {
+    appearance: none;
+    padding-right: 15px;
+}
+
+.zhazhasu-textarea {
+    min-height: 100px;
+    padding-right: 15px;
+    resize: vertical;
+    font-family: 'Courier New', monospace;
+}
+
+.zhazhasu-avatar-panel {
+    text-align: center;
+}
+
+.zhazhasu-avatar-preview-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 120px;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(0, 123, 255, 0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.zhazhasu-avatar-preview-wrap:hover .avatar-edit-overlay {
+    opacity: 1;
+}
+
+.zhazhasu-avatar-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.zhazhasu-avatar-empty {
+    width: 100%;
+    height: 100%;
+    background: #f8f9fa;
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.avatar-edit-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.zhazhasu-file-upload-area {
+    position: relative;
+    border: 2px dashed rgba(0, 123, 255, 0.3);
+    border-radius: 8px;
+    padding: 30px 20px;
+    text-align: center;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.zhazhasu-file-upload-area:hover,
+.zhazhasu-file-upload-area.dragover {
+    background-color: rgba(0, 123, 255, 0.05);
+    border-color: rgba(0, 123, 255, 0.6);
+}
+
+.zhazhasu-file-input-hidden {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.upload-area-content {
+    pointer-events: none;
+}
+
+.upload-area-content i {
+    font-size: 36px;
+    color: rgba(0, 123, 255, 0.5);
+    margin-bottom: 12px;
+}
+
+.upload-text {
+    margin: 0 0 6px 0;
+    color: #495057;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.upload-filename {
+    margin: 0;
+    font-size: 13px;
+    color: #6c757d;
+}
+
+.zhazhasu-user-table {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.zhazhasu-user-row {
+    display: grid;
+    grid-template-columns: 240px 220px 100px 1fr;
+    gap: 20px;
+    align-items: center;
+    padding: 16px 20px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 123, 255, 0.15);
+    transition: all 0.3s ease;
+}
+
+.zhazhasu-user-row:hover {
+    border-color: rgba(0, 123, 255, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.1);
+    background: #fff;
+}
+
+.zhazhasu-user-info-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.zhazhasu-user-avatar-small {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(0, 123, 255, 0.2);
+    background: #f0f7ff;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.zhazhasu-user-avatar-small img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.no-avatar-placeholder {
+    font-size: 10px;
+    color: #94a3b8;
+    text-align: center;
+    line-height: 1.2;
+    padding: 2px;
+}
+
+.zhazhasu-user-main-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow: hidden;
+}
+
+.zhazhasu-user-username {
+    font-weight: 600;
+    color: #1e293b;
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.zhazhasu-user-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.zhazhasu-user-name-info {
+    font-size: 14px;
+    color: #475569;
+    font-weight: 500;
+}
+
+.zhazhasu-user-phone-info {
+    font-size: 12px;
+    color: #64748b;
+}
+
+.zhazhasu-user-role-badge {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+    width: fit-content;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.zhazhasu-user-role-badge.admin {
+    background: rgba(0, 123, 255, 0.1);
+    color: #007bff;
+    border: 1px solid rgba(0, 123, 255, 0.2);
+}
+
+.zhazhasu-user-role-badge.user {
+    background: #f1f5f9;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
+}
+
+.zhazhasu-user-status-label {
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.zhazhasu-user-status-label.status-1 {
+    color: #10b981;
+}
+
+.zhazhasu-user-status-label.status-0 {
+    color: #f43f5e;
+}
+
+.zhazhasu-user-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.zhazhasu-user-actions .tech-btn {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.tech-btn-warning {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
+}
+
+.tech-btn-warning:hover {
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+    transform: translateY(-2px);
+}
+
+.zhazhasu-page-message {
+    position: sticky;
+    bottom: 20px;
+    z-index: 20;
+}
+
+.zhazhasu-page-message .alert {
+    margin-bottom: 0;
+}
+
+
+
+@media (max-width: 1400px) {
+    .zhazhasu-privesc-side {
+        flex-basis: 420px;
+        width: 420px;
+        max-width: 420px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .zhazhasu-privesc-layout {
+        flex-direction: column;
+    }
+
+    .zhazhasu-privesc-side {
+        position: static;
+        width: 100%;
+        max-width: 100%;
+        flex-basis: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .zhazhasu-data-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .zhazhasu-user-row {
+        grid-template-columns: 1fr;
+    }
+
+    .zhazhasu-user-actions {
+        justify-content: flex-start;
+    }
+
+    .zhazhasu-user-summary {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

@@ -1,0 +1,16 @@
+# Zhazhasu炸炸酥网安靱场 - OpenSSL最小化配置文件
+# 用于PHP openssl_pkey_new()生成RSA密钥对
+# 团队: 炸炸酥网安靱场 (Zhazhasu)
+
+# 基本设置
+HOME = .
+RANDFILE = $HOME/.rnd
+
+# 证书请求配置（生成密钥对时需要）
+[ req ]
+default_bits = 2048
+default_keyfile = privkey.pem
+distinguished_name = req_distinguished_name
+
+[ req_distinguished_name ]
+commonName = Common Name

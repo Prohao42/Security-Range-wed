@@ -1,0 +1,283 @@
+/**
+ * Zhazhasu炸炸酥网安靱场团队 - SQL注入基础靶场样式
+ * 版本: v1.0.0
+ * 团队: 炸炸酥网安靱场 (Zhazhasu)
+ */
+
+.zhazhasu-sqlibase-layout {
+    align-items: flex-start;
+}
+
+.zhazhasu-sqlibase-main {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+    min-height: min-content;
+    padding-bottom: 20px;
+}
+
+.zhazhasu-sqlibase-side {
+    flex: 0 0 360px;
+    max-width: 360px;
+    width: 360px;
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
+}
+
+.zhazhasu-panel-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ========== 分区布局 ========== */
+.zhazhasu-user-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.zhazhasu-content-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.zhazhasu-tools-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ========== 内嵌提示alert ========== */
+.zhazhasu-inline-alert {
+    margin-bottom: 16px;
+    padding: 12px 16px;
+}
+.zhazhasu-inline-alert .alert-hint {
+    font-size: 13px;
+}
+
+/* ========== Tab切换组件 ========== */
+.zhazhasu-tab-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.zhazhasu-tab-nav {
+    display: flex;
+    gap: 4px;
+    background: rgba(0, 123, 255, 0.06);
+    border-radius: 8px;
+    padding: 3px;
+}
+
+.zhazhasu-tab-btn {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: #6c757d;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.zhazhasu-tab-btn:hover {
+    color: #007bff;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.zhazhasu-tab-btn.active {
+    background: #fff;
+    color: #007bff;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.12);
+    font-weight: 600;
+}
+
+.zhazhasu-tab-content.active {
+    animation: tabFadeIn 0.25s ease-out;
+}
+
+@keyframes tabFadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.is-hidden {
+    display: none !important;
+}
+
+.zhazhasu-sqlibase-main .tech-card {
+    flex-shrink: 0;
+    flex-basis: auto;
+    min-height: min-content;
+    margin-bottom: 0;
+}
+
+/* 搜索区域 */
+.zhazhasu-sqlibase-search {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+    align-items: center;
+}
+
+.zhazhasu-sqlibase-search select {
+    flex: 1;
+}
+
+/* 资讯列表项 */
+.zhazhasu-sqlibase-article-item {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(0, 123, 255, 0.08);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.zhazhasu-sqlibase-article-item:hover {
+    background-color: rgba(0, 123, 255, 0.04);
+}
+
+.zhazhasu-sqlibase-article-item h4 {
+    margin: 0 0 6px 0;
+    color: #2c3e50;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.zhazhasu-sqlibase-article-item:last-child {
+    border-bottom: none;
+}
+
+.zhazhasu-sqlibase-meta {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+.zhazhasu-sqlibase-meta span {
+    margin-right: 12px;
+}
+
+/* 资讯详情 */
+.zhazhasu-sqlibase-detail-title {
+    margin: 16px 0 12px 0;
+    color: #2c3e50;
+    font-size: 22px;
+    line-height: 1.4;
+}
+
+.zhazhasu-sqlibase-detail-content {
+    margin-top: 16px;
+    line-height: 1.8;
+    color: #333;
+    font-size: 15px;
+}
+
+/* 数据网格 */
+.zhazhasu-data-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.zhazhasu-data-grid > div {
+    margin: 0;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 123, 255, 0.1);
+}
+
+.zhazhasu-data-grid span {
+    color: #6c757d;
+    font-size: 13px;
+}
+
+.zhazhasu-data-grid strong {
+    display: block;
+    margin-top: 6px;
+    color: #212529;
+    word-break: break-word;
+}
+
+/* 下拉框 */
+.zhazhasu-select {
+    appearance: none;
+    padding-right: 15px;
+}
+
+/* 文本域 */
+.zhazhasu-textarea {
+    min-height: 100px;
+    padding-right: 15px;
+    resize: vertical;
+}
+
+/* 消息提示 */
+.zhazhasu-sqlibase-message {
+    margin-top: 8px;
+    min-height: 20px;
+    font-size: 14px;
+}
+
+.zhazhasu-sqlibase-message.success {
+    color: #27ae60;
+}
+
+.zhazhasu-sqlibase-message.error {
+    color: #e74c3c;
+}
+
+/* 未登录时限制宽度 */
+#guestPanel {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* 响应式 */
+@media (max-width: 1400px) {
+    .zhazhasu-sqlibase-side {
+        flex-basis: 340px;
+        width: 340px;
+        max-width: 340px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .zhazhasu-sqlibase-layout {
+        flex-direction: column;
+    }
+
+    .zhazhasu-sqlibase-side {
+        position: static;
+        width: 100%;
+        max-width: 100%;
+        flex-basis: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .zhazhasu-data-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .zhazhasu-sqlibase-search {
+        flex-direction: column;
+    }
+
+    .zhazhasu-sqlibase-search select {
+        width: 100%;
+    }
+}
