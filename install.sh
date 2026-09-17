@@ -84,30 +84,23 @@ configure_apache() {
         chown -R apache:apache ${WEBROOT} 2>/dev/null || true
 
     # Apache config
-    cat > /etc/apache2/sites-available/000-default.conf 2>/dev/null <<'APACHECONF'
-<VirtualHost *:80>
+    APACHE_CONF="<VirtualHost *:80>
     DocumentRoot /var/www/html
     <Directory /var/www/html>
         Options Indexes FollowSymLinks
         AllowOverride All
         Require all granted
     </Directory>
-    ErrorLog ${APACHE_LOG_DIR}/error.log
-    CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
-APACHECONF
+    ErrorLog \${APACHE_LOG_DIR}/error.log
+    CustomLog \${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>"
 
-    # For CentOS/RHEL
-    cat > /etc/httpd/conf.d/zhazhasu.conf 2>/dev/null <<'APACHECONF'
-<VirtualHost *:80>
-    DocumentRoot /var/www/html
-    <Directory /var/www/html>
-        Options Indexes FollowSymLinks
-        AllowOverride All
-        Require all granted
-    </Directory>
-</VirtualHost>
-APACHECONF
+    if [ -d /etc/apache2 ]; then
+        echo "$APACHE_CONF" > /etc/apache2/sites-available/000-default.conf
+    fi
+    if [ -d /etc/httpd ]; then
+        echo "$APACHE_CONF" > /etc/httpd/conf.d/zhazhasu.conf
+    fi
 
     systemctl restart apache2 > /dev/null 2>&1 || \
         systemctl restart httpd > /dev/null 2>&1

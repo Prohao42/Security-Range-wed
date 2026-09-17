@@ -72,8 +72,9 @@ def configure_apache():
     for path in ["/etc/apache2/sites-available/000-default.conf",
                  "/etc/httpd/conf.d/zhazhasu.conf"]:
         try:
-            with open(path, "w") as f:
-                f.write(conf)
+            if os.path.isdir(os.path.dirname(path)):
+                with open(path, "w") as f:
+                    f.write(conf)
         except:
             pass
 
