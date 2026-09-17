@@ -3,7 +3,7 @@
 Zhazhasu Web Security Range - Installer
 Supports: Ubuntu/Debian/CentOS source install & Docker install
 """
-import subprocess, sys, os, json, platform
+import subprocess, sys, os, json, glob, socket
 
 RED, GREEN, YELLOW, NC = "\033[0;31m", "\033[0;32m", "\033[1;33m", "\033[0m"
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -12,14 +12,12 @@ def log(msg): print(f"{GREEN}[+]{NC} {msg}")
 def warn(msg): print(f"{YELLOW}[!]{NC} {msg}")
 def err(msg): print(f"{RED}[-]{NC} {msg}"); sys.exit(1)
 
-def run(cmd, check=True, capture=False):
+def run(cmd, check=True):
     print(f"    $ {cmd}")
-    r = subprocess.run(cmd, shell=True, capture_output=capture, text=True)
-    if check and r.returncode != 0:
-        if capture:
-            warn(r.stderr.strip())
-        return False
-    return True
+    r = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+    if check and r.returncode != 0 and r.stderr.strip():
+        warn(r.stderr.strip())
+    return r.returncode == 0
 
 def check_root():
     if os.geteuid() != 0:
@@ -34,15 +32,22 @@ def detect_os():
         return "", ""
 
 def install_ubuntu():
-    run("export DEBIAN_FRONTEND=noninteractive")
+    os.environ["DEBIAN_FRONTEND"] = "noninteractive"
+    log("Installing Apache...")
     run("apt-get update -qq")
+    run("apt-get install -y -qq apache2 > /dev/null")
+    run("a2enmod rewrite > /dev/null 2>&1 || true")
+
+    log("Installing PHP 7.3...")
     run("apt-get install -y -qq software-properties-common > /dev/null")
     run("add-apt-repository -y ppa:ondrej/php > /dev/null 2>&1 || true")
     run("apt-get update -qq")
-    run("apt-get install -y -qq apache2 php7.3 php7.3-cli php7.3-mysql php7.3-gd "
+    run("apt-get install -y -qq php7.3 php7.3-cli php7.3-mysql php7.3-gd "
         "php7.3-mbstring php7.3-xml php7.3-curl php7.3-zip php7.3-intl "
-        "mysql-server libapache2-mod-php7.3 > /dev/null")
-    run("a2enmod rewrite > /dev/null 2>&1 || true")
+        "libapache2-mod-php7.3 > /dev/null")
+
+    log("Installing MySQL...")
+    run("apt-get install -y -qq mysql-server > /dev/null")
 
 def install_centos():
     run("yum install -y -q epel-release > /dev/null 2>&1 || true")
@@ -54,9 +59,31 @@ def install_centos():
     run("systemctl start httpd > /dev/null 2>&1")
 
 def configure_mysql():
-    log("Configuring MySQL...")
+    log("Starting MySQL...")
     run("systemctl start mysql > /dev/null 2>&1 || systemctl start mysqld > /dev/null 2>&1 || true", check=False)
-    run("mysqladmin -u root password 'root' 2>/dev/null || true", check=False)
+    run("systemctl enable mysql > /dev/null 2>&1 || systemctl enable mysqld > /dev/null 2>&1 || true", check=False)
+
+    log("Setting root password...")
+    # Try socket auth first (Ubuntu default)
+    ok = run("mysql -u root -e \"ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root'; FLUSH PRIVILEGES;\" 2>/dev/null", check=False)
+    if not ok:
+        run("mysqladmin -u root password 'root' 2>/dev/null || true", check=False)
+
+    # Verify
+    if run("mysql -u root -proot -e 'SELECT 1;' > /dev/null 2>&1", check=False):
+        log("MySQL OK: root / root")
+    else:
+        warn("Trying skip-grant method...")
+        run("systemctl stop mysql > /dev/null 2>&1 || true", check=False)
+        subprocess.Popen("mysqld_safe --skip-grant-tables", shell=True)
+        import time; time.sleep(3)
+        run("mysql -u root -e \"FLUSH PRIVILEGES; ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root'; FLUSH PRIVILEGES;\" 2>/dev/null", check=False)
+        run("killall mysqld > /dev/null 2>&1 || true", check=False)
+        time.sleep(2)
+        run("systemctl start mysql > /dev/null 2>&1 || systemctl start mysqld > /dev/null 2>&1 || true", check=False)
+
+    if not run("mysql -u root -proot -e 'SELECT 1;' > /dev/null 2>&1", check=False):
+        err("MySQL password setup failed")
 
 def configure_apache():
     log("Configuring Apache...")
@@ -84,16 +111,36 @@ def configure_apache():
         "chown -R apache:apache /var/www/html 2>/dev/null || true", check=False)
     run("systemctl restart apache2 > /dev/null 2>&1 || "
         "systemctl restart httpd > /dev/null 2>&1", check=False)
+    log("Apache restarted")
 
 def init_database():
     log("Initializing databases...")
-    import glob
     for sql in glob.glob("/var/www/html/**/init_database.sql", recursive=True):
-        db_name = "zhazhasu_" + os.path.basename(os.path.dirname(os.path.dirname(sql)))
+        parts = sql.split("/")
+        # Find the range subfolder name
+        try:
+            idx = parts.index("range")
+            db_name = "zhazhasu_" + parts[idx + 1]
+        except:
+            db_name = "zhazhasu_" + os.path.basename(os.path.dirname(os.path.dirname(sql)))
+
         run(f'mysql -u root -proot -e "CREATE DATABASE IF NOT EXISTS `{db_name}` '
             f'CHARACTER SET utf8 COLLATE utf8_unicode_ci;" 2>/dev/null', check=False)
-        run(f'mysql -u root -proot "{db_name}" < "{sql}" 2>/dev/null', check=False)
-        log(f"  {db_name}")
+        if run(f'mysql -u root -proot "{db_name}" < "{sql}" 2>/dev/null', check=False):
+            log(f"  Imported: {db_name}")
+        else:
+            warn(f"  Skip: {db_name}")
+
+    # Main CMS database
+    cms_sql = "/var/www/html/database/init_database.sql"
+    if os.path.exists(cms_sql):
+        run('mysql -u root -proot -e "CREATE DATABASE IF NOT EXISTS `zhazhasu_cms` '
+            'CHARACTER SET utf8 COLLATE utf8_unicode_ci;" 2>/dev/null', check=False)
+        if run(f'mysql -u root -proot "zhazhasu_cms" < "{cms_sql}" 2>/dev/null', check=False):
+            log("  Imported: zhazhasu_cms")
+
+    log("All databases:")
+    run("mysql -u root -proot -e \"SHOW DATABASES LIKE 'zhazhasu_%';\" 2>/dev/null", check=False)
 
 def setup_docker_mirror():
     try:
@@ -101,7 +148,6 @@ def setup_docker_mirror():
             cfg = json.load(f)
     except:
         cfg = {}
-
     if "registry-mirrors" not in cfg:
         cfg["registry-mirrors"] = ["https://docker.1ms.run", "https://docker.m.daocloud.io"]
         tmp = "/tmp/daemon.json"
@@ -137,7 +183,6 @@ def source_install():
     configure_apache()
     init_database()
 
-    import socket
     ip = socket.gethostbyname(socket.gethostname())
     log("Installation complete!")
     print(f"\n  Visit: http://{ip}/")
@@ -157,7 +202,6 @@ def main():
         print("  [2] Docker install")
         print()
         choice = input("  Select (1/2): ").strip()
-
         check_root()
         if choice == "2":
             docker_install()
