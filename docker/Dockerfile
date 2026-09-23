@@ -1,10 +1,12 @@
 FROM php:7.3-apache
 
 # ---- 1. 系统依赖（仅 gd 所需图像库）----
-# Buster 已归档，若主源失效取消下方注释切换到 archive.debian.org
-# RUN sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list \
-#     && sed -i '/security/d' /etc/apt/sources.list
+# 基础镜像为 Debian bullseye（已 EOL），官方源与 security 套件均已下架（404），
+# 故改用归档镜像源，并关闭 Release 文件的 Valid-Until 校验
+# 备选归档源：archive.debian.org/debian（国外较慢）
 RUN set -eux; \
+    echo 'deb https://mirrors.aliyun.com/debian-archive/debian bullseye main' > /etc/apt/sources.list; \
+    echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid-until; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
         libpng-dev libjpeg-dev libfreetype6-dev; \
